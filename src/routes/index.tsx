@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { ArrowRight, Atom, Zap, History, Globe } from "lucide-react";
 import mushroom from "@/assets/mushroom-cloud.jpg";
 import fission from "@/assets/fission.jpg";
 import hiroshima from "@/assets/hiroshima.jpg";
@@ -19,153 +20,202 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <div className="min-h-screen bg-white text-slate-800 font-serif">
+    <div className="min-h-screen bg-white text-slate-800" style={{ scrollBehavior: "smooth" }}>
       {/* Nav */}
-      <header className="bg-[#1a2a4f] text-white">
-        <div className="max-w-4xl mx-auto px-4 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-          <h2 className="text-lg font-semibold">Chemistry Project</h2>
+      <header className="sticky top-0 z-30 bg-[#0f1f44] text-white shadow-sm">
+        <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+          <a href="#hero" className="flex items-center gap-2 font-semibold">
+            <Atom className="w-5 h-5 text-orange-400" />
+            <span>Chem Project</span>
+          </a>
           <nav>
             <ul className="flex flex-wrap gap-4 text-sm">
-              <li><a href="#title" className="hover:underline">Home</a></li>
-              <li><a href="#history" className="hover:underline">History</a></li>
-              <li><a href="#chemistry" className="hover:underline">Chemistry</a></li>
-              <li><a href="#effects" className="hover:underline">Effects</a></li>
-              <li><a href="#conclusion" className="hover:underline">Conclusion</a></li>
+              <li><a href="#history" className="hover:text-orange-300 transition-colors">History</a></li>
+              <li><a href="#chemistry" className="hover:text-orange-300 transition-colors">Chemistry</a></li>
+              <li><a href="#effects" className="hover:text-orange-300 transition-colors">Effects</a></li>
+              <li><a href="#conclusion" className="hover:text-orange-300 transition-colors">Conclusion</a></li>
             </ul>
           </nav>
         </div>
       </header>
 
-      <main className="max-w-4xl mx-auto px-4 py-10">
-        {/* Title */}
-        <section id="title" className="mb-12">
-          <h1 className="text-4xl font-bold text-[#1a2a4f] mb-4">The Atomic Bomb</h1>
-          <p className="text-base leading-relaxed mb-6">
-            The atomic bomb is one of the most powerful weapons ever created. It changed
-            the way wars are fought and made people around the world think about science,
-            peace, and responsibility. This project explains a little about its history,
-            how it works, and the effects it had on people and the environment.
+      {/* Hero */}
+      <section
+        id="hero"
+        className="relative text-white"
+        style={{
+          backgroundImage: `linear-gradient(rgba(15,31,68,0.75), rgba(15,31,68,0.85)), url(${mushroom})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <div className="max-w-5xl mx-auto px-4 py-24 sm:py-32 text-center">
+          <h1 className="text-4xl sm:text-6xl font-bold mb-4 tracking-tight">
+            The Atomic Bomb
+          </h1>
+          <p className="max-w-2xl mx-auto text-base sm:text-lg text-slate-200 mb-8 leading-relaxed">
+            A short look at the history, chemistry, and impact of one of the most
+            powerful weapons ever created. Made for 10th grade chemistry.
           </p>
-          <img
-            src={mushroom}
-            alt="Mushroom cloud from an atomic explosion"
-            width={1024}
-            height={640}
-            className="w-full h-auto border border-gray-300"
-          />
-        </section>
+          <a
+            href="#history"
+            className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 hover:-translate-y-0.5 transition-all duration-200 text-white font-medium px-6 py-3 rounded-full shadow-md"
+          >
+            Learn More <ArrowRight className="w-4 h-4" />
+          </a>
+        </div>
+      </section>
 
+      <main className="max-w-5xl mx-auto px-4 py-16 space-y-20">
         {/* History */}
-        <section id="history" className="mb-12">
-          <h2 className="text-2xl font-bold text-[#1a2a4f] border-b border-gray-300 pb-2 mb-4">
-            History
-          </h2>
-          <p className="mb-4 leading-relaxed">
-            World War II was a global conflict that lasted from 1939 to 1945. It involved
-            most of the world's countries and caused millions of deaths. Near the end of
-            the war, the United States developed a new and very powerful weapon: the
-            atomic bomb.
+        <section id="history">
+          <SectionHeader icon={<History className="w-5 h-5" />} kicker="Part 1" title="History" />
+          <p className="text-slate-600 mb-8 max-w-3xl leading-relaxed">
+            The atomic bomb was developed during World War II (1939–1945), a global
+            conflict that involved most of the world's countries. Here are the key
+            moments that led to its creation and use.
           </p>
-          <h3 className="text-xl font-semibold mb-2">The Manhattan Project</h3>
-          <p className="mb-4 leading-relaxed">
-            The Manhattan Project was a secret research program started by the United
-            States in 1942. Scientists like J. Robert Oppenheimer worked together to build
-            the first atomic bomb. The project took several years and cost billions of
-            dollars.
-          </p>
-          <h3 className="text-xl font-semibold mb-2">Hiroshima and Nagasaki</h3>
-          <p className="mb-4 leading-relaxed">
-            On August 6, 1945, the United States dropped an atomic bomb on the Japanese
-            city of Hiroshima. Three days later, a second bomb was dropped on Nagasaki.
-            These bombings caused massive destruction and led to Japan's surrender,
-            ending World War II.
-          </p>
+          <div className="grid sm:grid-cols-3 gap-5">
+            <Card title="World War II">
+              A global war between the Allies and the Axis powers. By 1945, the United
+              States was looking for a way to end the war quickly.
+            </Card>
+            <Card title="Manhattan Project">
+              A secret U.S. research program started in 1942. Led by J. Robert
+              Oppenheimer, scientists worked together to build the first atomic bomb.
+            </Card>
+            <Card title="Hiroshima & Nagasaki">
+              On August 6 and 9, 1945, the U.S. dropped two atomic bombs on Japan.
+              These attacks led to Japan's surrender and the end of WWII.
+            </Card>
+          </div>
           <img
             src={hiroshima}
-            alt="Hiroshima after the bombing in 1945"
+            alt="Hiroshima after the 1945 bombing"
             width={1024}
             height={640}
             loading="lazy"
-            className="w-full h-auto border border-gray-300"
+            className="w-full h-auto rounded-xl mt-8 border border-slate-200 shadow-sm"
           />
         </section>
 
         {/* Chemistry */}
-        <section id="chemistry" className="mb-12">
-          <h2 className="text-2xl font-bold text-[#1a2a4f] border-b border-gray-300 pb-2 mb-4">
-            Chemistry
-          </h2>
-          <p className="mb-4 leading-relaxed">
-            The atomic bomb works through a process called <strong>nuclear fission</strong>.
-            Fission happens when the nucleus of a heavy atom, like Uranium-235, is hit by
-            a neutron and splits into two smaller atoms. This releases a large amount of
-            energy and more neutrons.
-          </p>
-          <p className="mb-4 leading-relaxed">
-            The new neutrons then hit other uranium atoms, causing them to split too. This
-            is called a <strong>chain reaction</strong>. In an atomic bomb, the chain
-            reaction happens very fast and produces an enormous explosion.
-          </p>
-          <p className="mb-4 leading-relaxed">
-            A small amount of uranium can release a huge amount of energy because of
-            Einstein's famous equation, E = mc². This means that even a tiny bit of mass
-            can be turned into a lot of energy.
-          </p>
-          <img
-            src={fission}
-            alt="Diagram of nuclear fission"
-            width={800}
-            height={600}
-            loading="lazy"
-            className="w-full max-w-md mx-auto h-auto border border-gray-300 bg-white"
-          />
+        <section id="chemistry">
+          <SectionHeader icon={<Zap className="w-5 h-5" />} kicker="Part 2" title="The Chemistry" />
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div className="space-y-4 text-slate-700 leading-relaxed">
+              <p>
+                The atomic bomb works through a process called{" "}
+                <strong className="text-[#0f1f44]">nuclear fission</strong>. When the
+                nucleus of a Uranium-235 atom is hit by a neutron, it splits into two
+                smaller atoms.
+              </p>
+              <p>
+                This split releases energy and more neutrons, which hit other uranium
+                atoms and cause them to split too. This is called a{" "}
+                <strong className="text-[#0f1f44]">chain reaction</strong>.
+              </p>
+              <p>
+                A tiny amount of mass becomes a huge amount of energy, just like
+                Einstein's equation says: <em>E = mc²</em>.
+              </p>
+              <div className="inline-block bg-red-50 border-l-4 border-red-500 px-4 py-3 rounded">
+                <p className="text-sm text-red-800 m-0">
+                  Just 1 kg of Uranium-235 can release the same energy as about
+                  20,000 tons of TNT.
+                </p>
+              </div>
+            </div>
+            <img
+              src={fission}
+              alt="Diagram of nuclear fission"
+              width={800}
+              height={600}
+              loading="lazy"
+              className="w-full h-auto rounded-xl border border-slate-200 shadow-sm bg-white"
+            />
+          </div>
         </section>
 
         {/* Effects */}
-        <section id="effects" className="mb-12">
-          <h2 className="text-2xl font-bold text-[#1a2a4f] border-b border-gray-300 pb-2 mb-4">
-            Effects
-          </h2>
-          <h3 className="text-xl font-semibold mb-2">Human Impact</h3>
-          <p className="mb-4 leading-relaxed">
-            The atomic bombings of Hiroshima and Nagasaki killed over 200,000 people.
-            Many died instantly, while others suffered from burns, radiation sickness,
-            and long-term health problems like cancer.
-          </p>
-          <h3 className="text-xl font-semibold mb-2">Environmental Effects</h3>
-          <p className="mb-4 leading-relaxed">
-            The explosions destroyed buildings, started fires, and polluted the air,
-            water, and soil with radiation. The land took many years to recover, and some
-            areas were unsafe for a long time.
-          </p>
-          <h3 className="text-xl font-semibold mb-2">Importance in History</h3>
-          <p className="mb-4 leading-relaxed">
-            The atomic bomb changed the world. It started the nuclear age and led to the
-            Cold War between the United States and the Soviet Union. Today, countries
-            still discuss nuclear weapons and try to prevent their use.
-          </p>
+        <section id="effects">
+          <SectionHeader icon={<Globe className="w-5 h-5" />} kicker="Part 3" title="Effects" />
+          <div className="grid sm:grid-cols-3 gap-5">
+            <Card title="Human Impact" accent="red">
+              The bombings killed over 200,000 people. Many died instantly, while
+              others suffered from burns and radiation sickness for years.
+            </Card>
+            <Card title="Environmental Impact" accent="red">
+              The explosions destroyed buildings and polluted the air, water, and
+              soil with radiation. Some areas were unsafe for a long time.
+            </Card>
+            <Card title="Importance in History" accent="red">
+              The atomic bomb started the nuclear age and shaped the Cold War. It
+              still affects world politics today.
+            </Card>
+          </div>
         </section>
 
         {/* Conclusion */}
-        <section id="conclusion" className="mb-12">
-          <h2 className="text-2xl font-bold text-[#1a2a4f] border-b border-gray-300 pb-2 mb-4">
-            Conclusion
-          </h2>
-          <p className="leading-relaxed">
-            The atomic bomb is an example of how powerful science can be. It can be used
-            for great discoveries, but it can also cause terrible destruction. Learning
-            about the atomic bomb helps us understand history and reminds us to use
-            science in a responsible way.
+        <section id="conclusion" className="bg-slate-50 rounded-2xl p-8 sm:p-12 border border-slate-200">
+          <h2 className="text-2xl sm:text-3xl font-bold text-[#0f1f44] mb-4">Conclusion</h2>
+          <p className="text-slate-700 leading-relaxed max-w-3xl">
+            The atomic bomb shows how powerful science can be. It can lead to amazing
+            discoveries, but it can also cause terrible destruction. Studying it
+            reminds us to use science in a responsible way and to value peace.
           </p>
         </section>
       </main>
 
-      <footer className="bg-gray-100 border-t border-gray-300 py-6">
-        <div className="max-w-4xl mx-auto px-4 text-center text-sm text-gray-600">
-          <p>Made by Roberto Godo</p>
+      <footer className="bg-[#0f1f44] text-slate-300 py-8 mt-10">
+        <div className="max-w-5xl mx-auto px-4 text-center text-sm space-y-1">
+          <p className="font-medium text-white">Made by Roberto Godo</p>
           <p>Middlebury, Indiana</p>
         </div>
       </footer>
+    </div>
+  );
+}
+
+function SectionHeader({
+  icon,
+  kicker,
+  title,
+}: {
+  icon: React.ReactNode;
+  kicker: string;
+  title: string;
+}) {
+  return (
+    <div className="mb-6">
+      <div className="flex items-center gap-2 text-orange-600 text-sm font-medium mb-2">
+        {icon}
+        <span className="uppercase tracking-wider">{kicker}</span>
+      </div>
+      <h2 className="text-3xl sm:text-4xl font-bold text-[#0f1f44]">{title}</h2>
+    </div>
+  );
+}
+
+function Card({
+  title,
+  children,
+  accent = "blue",
+}: {
+  title: string;
+  children: React.ReactNode;
+  accent?: "blue" | "red";
+}) {
+  const accentClass =
+    accent === "red"
+      ? "before:bg-red-500"
+      : "before:bg-orange-400";
+  return (
+    <div
+      className={`relative bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200 before:content-[''] before:absolute before:top-0 before:left-0 before:right-0 before:h-1 before:rounded-t-xl ${accentClass}`}
+    >
+      <h3 className="font-semibold text-[#0f1f44] mb-2">{title}</h3>
+      <p className="text-sm text-slate-600 leading-relaxed">{children}</p>
     </div>
   );
 }
