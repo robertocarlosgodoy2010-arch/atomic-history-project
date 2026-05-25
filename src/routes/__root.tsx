@@ -72,21 +72,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
+      { title: "The Atomic Bomb — Roberto Godo" },
+      { name: "description", content: "A high school project about the atomic bomb." },
     ],
-    links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
-    ],
+    links: [{ rel: "stylesheet", href: appCss }],
   }),
   shellComponent: RootShell,
   component: RootComponent,
@@ -108,12 +97,66 @@ function RootShell({ children }: { children: React.ReactNode }) {
   );
 }
 
+const navLinks = [
+  { to: "/", label: "Home" },
+  { to: "/history", label: "History" },
+  { to: "/how-it-worked", label: "How It Worked" },
+  { to: "/effects", label: "Effects" },
+  { to: "/charts", label: "Charts" },
+  { to: "/gallery", label: "Gallery" },
+] as const;
+
+function SiteHeader() {
+  return (
+    <header className="sticky top-0 z-30 bg-[#0f1f44] text-white border-b border-white/10">
+      <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+        <Link to="/" className="font-semibold tracking-tight text-base sm:text-lg">
+          The Atomic Bomb
+        </Link>
+        <nav>
+          <ul className="flex flex-wrap gap-1 sm:gap-2 text-xs sm:text-sm">
+            {navLinks.map((l) => (
+              <li key={l.to}>
+                <Link
+                  to={l.to}
+                  activeOptions={{ exact: true }}
+                  className="px-2.5 py-1.5 rounded-full text-slate-200 hover:text-white hover:bg-white/10 transition-colors"
+                  activeProps={{ className: "px-2.5 py-1.5 rounded-full bg-white text-[#0f1f44] font-medium" }}
+                >
+                  {l.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+    </header>
+  );
+}
+
+function SiteFooter() {
+  return (
+    <footer className="bg-[#0f1f44] text-slate-300 py-8 mt-16">
+      <div className="max-w-5xl mx-auto px-4 text-center text-sm space-y-1">
+        <p className="font-medium text-white">Made by Roberto Godo</p>
+        <p>Middlebury, Indiana</p>
+      </div>
+    </footer>
+  );
+}
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
+      <div className="min-h-screen flex flex-col bg-white text-slate-800">
+        <SiteHeader />
+        <main className="flex-1">
+          <Outlet />
+        </main>
+        <SiteFooter />
+      </div>
     </QueryClientProvider>
   );
 }
